@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+import { userModel } from "../interface/userInterface";
 
-const userSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema<userModel>(
     {
         id: {
             type: Number,

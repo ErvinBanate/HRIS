@@ -1,6 +1,6 @@
 import express from "express";
-import { deleteUserById, getAllUsers, getUserById, saveUser, updateUserById } from "../services/userCrudService";
-import { userData } from "../interface/userInterface";
+import { deleteUserById, getAllUsers, getLastId, getUserById, saveUser, updateUserById } from "../services/userCrudService";
+import { userData, userModel } from "../interface/userInterface";
 
 const router = express.Router();
 
@@ -75,12 +75,10 @@ router.post('/', async (req, res) => {
                 message: "Please fill up all required"
             });
         }
-        const users = await getAllUsers();
-        let userLength:any = users?.length;
-        userLength++;
-        console.log(typeof(req.body));
+        const users = await getLastId();
+        const lastUserId: number = users?.id;
         const newUser: userData = {
-            id: userLength,
+            id: lastUserId+1,
             parent_id: req.body.parent_id,
             shortid: req.body.shortid,
             first_name: req.body.first_name,
