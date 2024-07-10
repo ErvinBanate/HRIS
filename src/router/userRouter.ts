@@ -1,16 +1,18 @@
 import express from "express";
-import { deleteUserById, getAllUsers, getLastId, getUserById, saveUser, updateUserById } from "../services/userCrudService";
-import { userData, userModel } from "../interface/userInterface";
+import { deleteUserById, getAllUsers, getLastId, getUserById, getUserEmployeesName, saveUser, updateUserById } from "../services/userService";
+import { userData } from "../interface/userInterface";
 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
         const users = await getAllUsers();
+        const employees = await getUserEmployeesName();
 
         return res.status(200).json({
             count: users?.length,
             data: users,
+            employee: employees,
         });
     } catch (error: any) {
         console.log(error.message);
@@ -39,7 +41,7 @@ router.put('/:id', async (req, res) => {
             });
         }
         const { id } = req.params;
-        const numberId = Number(id);
+        const numberId: number = Number(id);
         const result = await updateUserById(numberId, req.body);
 
         if (!result) {
@@ -76,7 +78,7 @@ router.post('/', async (req, res) => {
             });
         }
         const users = await getLastId();
-        const lastUserId: number = users?.id;
+        const lastUserId: number = users ? users?.id : 0;
         const newUser: userData = {
             id: lastUserId+1,
             parent_id: req.body.parent_id,
@@ -100,7 +102,7 @@ router.post('/', async (req, res) => {
             notes: req.body.notes,
             reset_token: req.body.reset_token,
             created_by: req.body.created_by,
-            updated_by: req.body.updated_by
+            updated_by: req.body.updated_by,
         }
         const user = await saveUser(newUser);
 
@@ -108,6 +110,17 @@ router.post('/', async (req, res) => {
     } catch (error: any) {
         console.log(error.message);
         res.status(500).send({ message: error.message });
+    }
+});
+
+router.get('/employeeNames', async (req, res) => {
+    try {
+        const employees = await getUserEmployeesName();
+
+        return res.status(200).json(employees);
+    } catch (error: any) {
+        console.log(error.message + '1');
+        res.status(500).send({ message: error.message + '2' });
     }
 });
 

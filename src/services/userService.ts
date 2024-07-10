@@ -54,3 +54,12 @@ export const getLastId = () => {
         console.log(error.message);
     }
 }
+
+export const getUserEmployeesName = () => {
+    try {
+        const employees = User.find().select({first_name: 1, _id: 0});
+        return employees;
+    } catch (error: any) {
+        console.log(error.message + '3');
+    }
+}
