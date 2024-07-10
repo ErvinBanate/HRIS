@@ -1,4 +1,5 @@
 import express from "express";
+import bcrypt from "bcrypt";
 import { deleteUserById, getAllUsers, getLastId, getUserById, getUserEmployeesName, saveUser, updateUserById } from "../services/userService";
 import { userData } from "../interface/userInterface";
 
@@ -77,6 +78,8 @@ router.post('/', async (req, res) => {
                 message: "Please fill up all required"
             });
         }
+        const password = req.body.password;
+        const hashedPassword = await bcrypt.hash(password,10);
         const users = await getLastId();
         const lastUserId: number = users ? users?.id : 0;
         const newUser: userData = {
@@ -96,7 +99,7 @@ router.post('/', async (req, res) => {
             contact_number: req.body.contact_number,
             email: req.body.email,
             username: req.body.username,
-            password: req.body.password,
+            password: hashedPassword,
             status: req.body.status,
             user_role: req.body.user_role,
             notes: req.body.notes,
