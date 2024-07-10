@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import { PORT, mongoDBURL } from "./config";
 import userRouter from "./router/userRouter";
+import authRouter from "./router/authRouter";
 import userAccountRouter from "./router/userAccountRouter";
 import employeeRouter from "./router/employeeRouter";
 import bodyParser from "body-parser";
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use('/user', userRouter);
 app.use('/userAccount', userAccountRouter);
 app.use('/employee', employeeRouter);
+app.use('/auth', authRouter);
 
 mongoose.connect(mongoDBURL).then(() => {
     console.log("Mongo Database is connected");

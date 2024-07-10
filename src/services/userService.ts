@@ -19,6 +19,15 @@ export const getUserById = (id : number) => {
     }
 };
 
+export const getUserByEmail = (email : string) => {
+    try {
+        const user = User.findOne({email: email});
+        return user;
+    } catch (error: any) {
+        console.log(error.message);
+    }
+};
+
 export const updateUserById = (id : number, data: userData) => {
     try {
         const result = User.findOneAndUpdate({id: id}, data);
