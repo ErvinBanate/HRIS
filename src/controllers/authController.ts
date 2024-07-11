@@ -3,9 +3,10 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { getUserByEmail } from "../services/userService";
 
-const JWT_TOKEN = "masdq123wepoteincas24bvuiehg912/.<1?[a2d]3445asdawcz\}{bcxs4587";
-
 export const login = async (req: Request, res: Response) => {
+
+    const JWT_SECRET = process.env.JWT_SECRET || '';
+
     const {email,password} = req.body;
     
     const user = await getUserByEmail(email);
@@ -17,7 +18,7 @@ export const login = async (req: Request, res: Response) => {
     const validPassword = await bcrypt.compare(password, userPassword);
     
     if(validPassword){
-        const token = jwt.sign({}, JWT_TOKEN);
+        const token = jwt.sign({}, JWT_SECRET);
 
         if(res.status(200)){
             return res.json({status:"success", data:token});

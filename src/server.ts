@@ -6,6 +6,10 @@ import authRouter from "./router/authRouter";
 import userAccountRouter from "./router/userAccountRouter";
 import employeeRouter from "./router/employeeRouter";
 import bodyParser from "body-parser";
+import dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
 
 const app = express();
 
