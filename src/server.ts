@@ -5,13 +5,16 @@ import userRouter from "./router/userRouter";
 import authRouter from "./router/authRouter";
 import userAccountRouter from "./router/userAccountRouter";
 import employeeRouter from "./router/employeeRouter";
+import cors from "cors";
 import bodyParser from "body-parser";
+
 import dotenv from 'dotenv';
 
 // Load environment variables from .env file
 dotenv.config();
 
 const app = express();
+app.use(cors());
 
 app.get('/', (req, res) => {
     return res.status(234).send("Hello World!");
