@@ -1,5 +1,5 @@
 import express from "express";
-import { deleteOvertimeByIdController, getAllOvertimeController, getOvertimeByIdController, postOvertimeController, updateOvertimeByIdController } from "../controller/overtimeController";
+import { deleteOvertimeByIdController, getAllOvertimeController, getOvertimeByIdController, postOvertimeController, updateOvertimeByIdController } from "../controllers/overtimeController";
 
 const router = express.Router();
 
