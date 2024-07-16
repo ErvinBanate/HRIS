@@ -4,7 +4,6 @@ import { PORT, mongoDBURL } from "./config";
 import userRouter from "./router/userRouter";
 import authRouter from "./router/authRouter";
 import userAccountRouter from "./router/userAccountRouter";
-import employeeRouter from "./router/employeeRouter";
 import shiftsRouter from "./router/shiftsRouter";
 import overtimeRouter from "./router/overtimeRouter";
 import workScheduleRouter from "./router/workScheduleRouter";
@@ -28,7 +27,6 @@ app.use(express.json());
 
 app.use('/user', userRouter);
 app.use('/userAccount', userAccountRouter);
-app.use('/employee', employeeRouter);
 app.use('/shift', shiftsRouter);
 app.use('/overtime', overtimeRouter);
 app.use('/workSchedule', workScheduleRouter);

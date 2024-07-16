@@ -1,5 +1,5 @@
 import express from "express";
-import { deleteShiftByIdController, getAllShiftsController, getShiftByIdController, postShiftController, updateShiftByIdController, userMonthlyHoursController, userShiftsController } from "../controller/shiftsController";
+import { deleteShiftByIdController, getAllShiftsController, getShiftByIdController, postShiftController, updateShiftByIdController, userMonthlyHoursController, userShiftsController } from "../controllers/shiftsController";
 
 const router = express.Router();
 

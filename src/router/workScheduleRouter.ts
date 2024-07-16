@@ -1,5 +1,5 @@
 import express from "express";
-import { deleteWorkScheduleByIdController, getAllWorkSchedulesController, getWorkScheduleByIdController, getWorkScheduleByUserIdController, postWorkScheduleController, updateWorkScheduleByIdController } from "../controller/workScheduleController";
+import { deleteWorkScheduleByIdController, getAllWorkSchedulesController, getWorkScheduleByIdController, getWorkScheduleByUserIdController, postWorkScheduleController, updateWorkScheduleByIdController } from "../controllers/workScheduleController";
 
 const router = express.Router();
 
