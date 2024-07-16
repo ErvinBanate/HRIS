@@ -66,7 +66,7 @@ export const getLastId = () => {
 
 export const getUserEmployeesName = () => {
     try {
-        const employees = User.find().select({first_name: 1, _id: 0});
+        const employees = User.find().select({first_name: 1, middle_name: 1, last_name: 1, _id: 0});
         return employees;
     } catch (error: any) {
         console.log(error.message + '3');
