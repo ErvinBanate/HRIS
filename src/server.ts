@@ -9,6 +9,7 @@ import overtimeRouter from "./router/overtimeRouter";
 import workScheduleRouter from "./router/workScheduleRouter";
 import cors from "cors";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 
 import dotenv from 'dotenv';
 
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.json());
+app.use(cookieParser());
 
 app.use('/user', userRouter);
 app.use('/userAccount', userAccountRouter);

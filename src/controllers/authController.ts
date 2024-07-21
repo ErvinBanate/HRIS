@@ -10,22 +10,27 @@ export const login = async (req: Request, res: Response) => {
     const {email,password} = req.body;
     
     const user = await getUserByEmail(email);
-
+    
     if(!user){
-        return res.json({message: "Email is not Registered"});
+        return res.json({errorEmail: "Email is not Registered"});
     }   
     const userPassword: string = user.password.toString();
+
     const validPassword = await bcrypt.compare(password, userPassword);
     
     if(validPassword){
-        const token = jwt.sign({}, JWT_SECRET);
+        const token = jwt.sign({username: email}, JWT_SECRET, {expiresIn: '1h'});
+        res.cookie('token', token, {httpOnly: true, maxAge: 360000});
 
         if(res.status(200)){
-            return res.json({status:"success", data:token});
-        }else{
-            return res.json({error: "error"});
+            return res.json({status:true, message:"Login Successfully!"});
         }
     }
 
-    res.json({status:"error", error: "Invalid Password"});
+    res.json({status:false, errorPass: "Invalid Password"});
+}
+
+export const logout = async (req: Request, res: Response) => {
+    res.clearCookie('token');
+    return res.json({ status: true});
 }
